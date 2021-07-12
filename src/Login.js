@@ -20,7 +20,8 @@ export default function Login() {
 
   return (
     <div>
-      <p>You must log in to view the page at {from.pathname}</p>
+      <p>
+Debe iniciar sesión para ver la página en {from.pathname}</p>
       <button onClick={login}>Log in</button>
     </div>
   );
