@@ -20,9 +20,20 @@ export default function Login() {
 
   return (
     <div>
+      <center>
+      <label>
+      Nombre:
+      <input type="text" name="nombre" />
+      </label>
+      &nbsp;
+      <label>
+      Password:
+      <input type="text" name="pass" />
+      </label>
       <p>
 Debe iniciar sesión para ver la página en {from.pathname}</p>
       <button onClick={login}>Log in</button>
+      </center>
     </div>
   );
 }
