@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Redirect, useLocation } from "react-router-dom";
 
+
 export default function Login() {
   const { state } = useLocation();
   const { from } = state || { from: { pathname: "/" } };
@@ -19,23 +20,24 @@ export default function Login() {
   }
 
   return (
-    <div>
-
-      <center>
-      <label>
-      Nombre:
-      <input type="text" name="nombre" />
-      </label>
-      &nbsp;
-      <label>
-      Password:
-      <input type="text" name="pass" />
-      </label>
-      <p>
-Debe iniciar sesión para ver la página en {from.pathname}</p>
+       
+<div className="login-page">
+  <div className="form">
+    <div className="logologin"></div>
+      
+      
+    
+    
+      <input type="text" placeholder="username"/>
+      <input type="password" placeholder="password"/>
       <button onClick={login}>Log in</button>
-      </center>
-    </div>
+     
+   
+  </div>
+</div>
+
+
+    
   );
 }
 

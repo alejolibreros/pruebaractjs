@@ -5,9 +5,13 @@ import { Link, Route, Switch } from "react-router-dom";
 // import Category from "./Category";
 // import Products from "./Products";
 import Login from './Login';
+import Formulario from "./Formulario";
+import Editar from "./Editar";
 import PrivateRoute from "./PrivateRoute";
 import "./assets/css/estilo.css"
 
+
+/* Vista Home  */
 
 const Home = () => (
   <div>    
@@ -16,6 +20,7 @@ const Home = () => (
     <p>Somos un proyecto social para dar hogar a gatos y perros que no lo tienen. Tu puedes cambiar una vida, anímate.
       </p> 
     <h3 style={{ color: 'white' }}>Dale hogar a estos amigos:</h3>  </center>
+        
     <div className="contenedor">
       <div className="columna">
 
@@ -28,6 +33,9 @@ const Home = () => (
         <center>
         <p>Hola me llamo Fluffy, soy raza pequeña.
           </p> 
+        &nbsp;
+        &nbsp;
+        <Link to="/Formulario" className="btn btn-primary">Adoptar</Link> 
        </center>
 
       </div>
@@ -41,6 +49,9 @@ const Home = () => (
           <center>
           <p>Hola me llamo Fluffy, soy raza pequeña.
             </p> 
+          &nbsp;
+          &nbsp;
+          <Link to="/Formulario" className="btn btn-primary">Adoptar</Link>
         </center>
       
       </div>
@@ -53,7 +64,10 @@ const Home = () => (
           &nbsp;
           <center>
           <p>Hola me llamo Fluffy, soy raza pequeña.
-            </p>           
+            </p> 
+          &nbsp;
+          &nbsp;
+          <Link to="/Formulario" className="btn btn-primary">Adoptar</Link>           
         </center>
       
       </div>
@@ -110,6 +124,8 @@ const Home = () => (
   </div>
 );
 
+/* Vista Admin */
+
 const Admin = () => (
   <div>
     &nbsp;
@@ -131,7 +147,8 @@ const Admin = () => (
         <p>Hola me llamo Fluffy, soy raza pequeña.
           </p> 
           &nbsp;  
-        <button>Editar</button>
+        <Link to="/Editar" className="btn btn-primary">Editar</Link>
+        <Link to="/Editar" className="btn btn-primary">Borrar</Link>
        </center>
 
       </div>
@@ -145,7 +162,8 @@ const Admin = () => (
           <center>
           <p>Hola me llamo Fluffy, soy raza pequeña.
             </p> 
-          <button>Editar</button>  
+          <Link to="/Editar" className="btn btn-primary">Editar</Link>
+          <Link to="/Editar" className="btn btn-primary">Borrar</Link>
         </center>
       
       </div>
@@ -159,7 +177,8 @@ const Admin = () => (
           <center>
           <p>Hola me llamo Fluffy, soy raza pequeña.
             </p> 
-          <button>Editar</button>
+            <Link to="/Editar" className="btn btn-primary">Editar</Link>
+            <Link to="/Editar" className="btn btn-primary">Borrar</Link>
         </center>
       
       </div>
@@ -167,13 +186,11 @@ const Admin = () => (
     </div>
 
 
-
-
-
-
-
   </div>
 );
+
+
+/* Menú y Rutas */ 
 
 export default function App() {
   return (
@@ -192,7 +209,8 @@ export default function App() {
 
       <Switch>
         <Route exact path="/"><Home /></Route>
-        
+        <Route path="/Formulario"><Formulario /></Route>
+        <Route path="/Editar"><Editar /></Route>
         <Route path="/login"><Login /></Route>
         <PrivateRoute path="/admin" component={Admin} />
       </Switch>
