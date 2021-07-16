@@ -84,6 +84,10 @@ const Home = () => (
       <div className="columna31">
       &nbsp;
       &nbsp;
+      
+      <div className="logo2"></div>
+      &nbsp;
+      &nbsp;
       <center>
           <h3 style={{ color: 'white' }}>Datos de contacto
             </h3>  
