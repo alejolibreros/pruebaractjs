@@ -5,6 +5,7 @@ import { Link, Route, Switch } from "react-router-dom";
 // import Category from "./Category";
 // import Products from "./Products";
 import Login from './Login';
+import DemoCarousel from './components/carousel'
 import Formulario from "./Formulario";
 import Editar from "./Editar";
 import PrivateRoute from "./PrivateRoute";
@@ -14,6 +15,9 @@ import "./assets/css/estilo.css"
 /* Vista Home  */
 
 const Home = () => (
+  <React.Fragment>
+    <DemoCarousel />
+
   <div>    
     &nbsp;
     <center>
@@ -122,10 +126,11 @@ const Home = () => (
               aria-hidden="false"
               tabIndex="0"
               
-            />
+              />
       </div>
     </div>
   </div>
+              </React.Fragment>
 );
 
 /* Vista Admin */
@@ -199,8 +204,8 @@ const Admin = () => (
 export default function App() {
   return (
     <div>
-      <nav className="navbar navbar-light">
-        <ul className="nav navbar-nav">
+      <nav className="navbar fixed-bottom py-0 bg-primary navbar-expand-lg">
+      
           <li> 
             <Link to="/"> <div className="logo"></div></Link>          
           </li>
@@ -208,7 +213,7 @@ export default function App() {
             
             <Link to="/admin">Login</Link>
           </li>         
-        </ul>
+        
       </nav>
 
       <Switch>
