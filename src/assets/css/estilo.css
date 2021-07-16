@@ -48,6 +48,26 @@ body {
     border-radius: 20px;
   }
   
+  .columna31 {
+    float: left;
+    width: 30%;
+    
+    height: 500px; /* Should be removed. Only for demonstration */
+    background-color: #000000;
+    
+    box-shadow: 0px 0px 11px #9a9898;
+  }  
+
+  .columna32 {
+    float: left;
+    width: 70%;
+    
+    height: 400px; /* Should be removed. Only for demonstration */
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 11px #9a9898;  
+        
+  }
+
   @media screen and (max-width: 900px) {
     .columna {
       width: 31%;
@@ -59,6 +79,13 @@ body {
     .columna {
       width: 94%;
       margin: 3%;
+      height: 500px;
+    }
+    .columna31 {
+      width: 100%;
+    }
+    .columna32 {
+      width: 100%;
     }
   }
 
@@ -105,4 +132,8 @@ img {
 .nav>li>a:hover, .nav>li>a:focus {
   text-decoration: none;
   background-color: #fff;
+}
+
+p {
+   font-size: 17px;
 }
