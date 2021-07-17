@@ -322,3 +322,7 @@ p {
   clear: both;
   
 }
+
+.carousel .slide .legend {
+ background-color: #000;  
+}

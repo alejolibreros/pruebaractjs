@@ -205,7 +205,7 @@ export default function App() {
   return (
     <div>
       <nav className="navbar fixed-bottom py-0 bg-primary navbar-expand-lg">
-      
+      <ul className="nav navbar-nav">
           <li> 
             <Link to="/"> <div className="logo"></div></Link>          
           </li>
@@ -213,7 +213,7 @@ export default function App() {
             
             <Link to="/admin">Login</Link>
           </li>         
-        
+          </ul>
       </nav>
 
       <Switch>

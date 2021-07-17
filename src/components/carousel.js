@@ -8,11 +8,11 @@ export default class DemoCarousel extends Component {
         return (
             <Carousel>
                 <div>
-                    <img src="/static/img/1.jpg" />
+                    <img src="/static/img/3.jpg" />
                     <p className="legend">Mejor adopta, no compres!</p>
                 </div>
                 <div>
-                    <img src="/static/img/3.jpg" />
+                    <img src="/static/img/1.jpg" />
                     <p className="legend">Dale un hogar a quien lo necesita</p>
                 </div>
             </Carousel>
