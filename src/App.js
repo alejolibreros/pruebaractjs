@@ -2,12 +2,10 @@
 
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
-// import Category from "./Category";
-// import Products from "./Products";
-import Login from './Login';
+import Login from './pages/Login';
 import DemoCarousel from './components/carousel'
-import Formulario from "./Formulario";
-import Editar from "./Editar";
+import Formulario from "./pages/Formulario";
+import Editar from "./pages/Editar";
 import PrivateRoute from "./PrivateRoute";
 import "./assets/css/estilo.css"
 

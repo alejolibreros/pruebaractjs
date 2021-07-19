@@ -324,5 +324,6 @@ p {
 }
 
 .carousel .slide .legend {
- background-color: #000;  
+ background-color: #000; 
+ border-radius: 45px; 
 }
