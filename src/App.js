@@ -8,6 +8,7 @@ import DemoCarousel from "./components/carousel";
 import Formulario from "./Formulario";
 import Editar from "./Editar";
 import FormularioMascotaModal from "./components/FormularioMascotaModal";
+import HomeAdmin from "./components/home-admin.component";
 import PrivateRoute from "./PrivateRoute";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -119,7 +120,7 @@ const Admin = () => (
   <div>
     &nbsp; &nbsp;
     <center>
-      <h2 style={{ color: "white" }}>Hola admin!</h2>
+      <h2 style={{ color: "white" }}>¡Hola Administrador!</h2>
     </center>
     <FormularioMascotaModal></FormularioMascotaModal>
     <div className="contenedor">
@@ -198,7 +199,7 @@ export default function App() {
         <Route path="/Formulario" component={Formulario} />
         <Route path="/Editar" component={Editar} />
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/admin" component={Admin} />
+        <PrivateRoute path="/admin" component={HomeAdmin} />
       </Switch>
     </div>
   );

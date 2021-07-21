@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-/* import axios from "axios"; */
+import axios from "axios";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 
 export default class FormularioMascotaModal extends Component {
@@ -58,7 +58,7 @@ export default class FormularioMascotaModal extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const studentObject = {
+    const mascotaObject = {
       name: this.state.name,
       descripcion: this.state.descripcion,
       foto: this.state.foto,
@@ -68,12 +68,12 @@ export default class FormularioMascotaModal extends Component {
       estado: this.state.estado,
     };
     console.log(`Mascota creada!`);
-    console.log(studentObject);
+    console.log(mascotaObject);
 
-    /* axios
-          .post("http://localhost:4000/students/crear-mascota", studentObject)
-          .then((res) => console.log(res.data));
- */
+    axios
+      .post("http://localhost:4000/mascotas/crear-mascota", mascotaObject)
+      .then((res) => console.log(res.data));
+
     this.setState({
       name: "",
       descripcion: "",
