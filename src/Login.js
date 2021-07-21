@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Redirect, useLocation } from "react-router-dom";
 
-
 export default function Login() {
   const { state } = useLocation();
   const { from } = state || { from: { pathname: "/" } };
@@ -20,24 +19,15 @@ export default function Login() {
   }
 
   return (
-       
-<div className="login-page">
-  <div className="form">
-    <div className="logologin"></div>
-      
-      
-    
-    
-      <input type="text" placeholder="username"/>
-      <input type="password" placeholder="password"/>
-      <button onClick={login}>Log in</button>
-     
-   
-  </div>
-</div>
+    <div className="login-page">
+      <div className="form">
+        <div className="logologin"></div>
 
-
-    
+        <input type="text" placeholder="Usuario" />
+        <input type="password" placeholder="Contraseña" />
+        <button onClick={login}>Log in</button>
+      </div>
+    </div>
   );
 }
 
@@ -47,5 +37,5 @@ export const fakeAuth = {
   authenticate(cb) {
     this.isAuthenticated = true;
     setTimeout(cb, 100);
-  }
+  },
 };
