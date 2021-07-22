@@ -1,29 +1,28 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+/* import axios from "axios"; */
 import { Button, Card } from "react-bootstrap";
 
 export default class MascotaCard extends Component {
   constructor(props) {
     super(props);
-    this.deleteStudent = this.deleteStudent.bind(this);
+    this.eliminarMascota = this.eliminarMascota.bind(this);
   }
 
-  deleteStudent() {
-    axios
+  eliminarMascota() {
+    console.log("Eliminado");
+    /* axios
       .delete(
-        "http://localhost:4000/students/delete-student/" + this.props.obj._id
+        "http://localhost:4000/mascotas/delete-student/" + this.props.obj._id
       )
       .then((res) => {
         console.log("Student successfully deleted!");
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); */
   }
 
   render() {
-    {/* <Card style={{ width: "18rem" }}> */}
     return (
       <Card style={{ width: "18rem" }}>
         <Card.Header>{this.props.obj.name}</Card.Header>
@@ -36,29 +35,21 @@ export default class MascotaCard extends Component {
         />
         <Card.Body>
           <Card.Text>
-            {this.props.obj.descripcion}, {this.props.obj.sexo},
-            {this.props.obj.tamanho},{this.props.obj.edad}
+            {this.props.obj.descripcion}, tiene {this.props.obj.edad} años, es{" "}
+            {this.props.obj.sexo}, de tamaño {this.props.obj.tamanho}.
           </Card.Text>
         </Card.Body>
         <Card.Footer className="text-center">
-          <Button variant="success">Editar</Button>
-          <Button variant="danger">Eliminar</Button>
-        </Card.Footer>
-
-        {/* <tr>
-        <td>{this.props.obj.estado}</td>
-        <td>
-        <Link
-        className="edit-link"
-            to={"/edit-student/" + this.props.obj._id}
-            >
-            Edit
-          </Link>
-          <Button onClick={this.deleteStudent} size="sm" variant="danger">
-          Delete
+          <Button
+            href={"/editar-mascota/" + this.props.obj._id}
+            variant="success"
+          >
+            Editar
           </Button>
-          </td>
-        </tr> */}
+          <Button onClick={this.eliminarMascota} variant="danger">
+            Eliminar
+          </Button>
+        </Card.Footer>
       </Card>
     );
   }

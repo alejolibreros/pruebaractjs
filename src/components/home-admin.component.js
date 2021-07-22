@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
 import FormularioMascotaModal from "./FormularioMascotaModal";
 import VerMascota from "./ver-mascota.component";
 

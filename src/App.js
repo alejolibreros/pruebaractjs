@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/estilo.css";
 
 import logoFoto from "./assets/img/logo.jpg";
+import EditarMascota from "./components/editar-mascota.component";
 
 /* Vista Home  */
 
@@ -196,6 +197,7 @@ export default function App() {
 
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/editar-mascota/:id" component={EditarMascota} />
         <Route path="/Formulario" component={Formulario} />
         <Route path="/Editar" component={Editar} />
         <Route path="/login" component={Login} />
