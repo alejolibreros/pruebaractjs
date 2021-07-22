@@ -10,7 +10,7 @@ export default class HomeAdmin extends Component {
           <h2 style={{ color: "white" }}>¡Hola Administrador!</h2>
         </center>
         <FormularioMascotaModal></FormularioMascotaModal>
-        <VerMascota></VerMascota>
+        {<VerMascota></VerMascota>}
       </div>
     );
   }

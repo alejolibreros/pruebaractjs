@@ -1,24 +1,22 @@
 // src/App.js
 import React from "react";
-import { Nav, Navbar} from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter as Switch, Route, Link } from "react-router-dom";
 
 import Login from "./Login";
 import DemoCarousel from "./components/carousel";
 import Formulario from "./Formulario";
 import Editar from "./Editar";
-import FormularioMascotaModal from "./components/FormularioMascotaModal";
 import HomeAdmin from "./components/home-admin.component";
+import EditarMascota from "./components/editar-mascota.component";
 import PrivateRoute from "./PrivateRoute";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/estilo.css";
 
 import logoFoto from "./assets/img/logo.jpg";
-import EditarMascota from "./components/editar-mascota.component";
 
 /* Vista Home  */
-
 const Home = () => (
   <React.Fragment>
     <DemoCarousel />
@@ -28,7 +26,7 @@ const Home = () => (
       <center>
         <p>
           Somos un proyecto social para dar hogar a gatos y perros que no lo
-          tienen. Tu puedes cambiar una vida, anímate.
+          tienen. Tú puedes cambiar una vida, anímate.
         </p>
         <h3 style={{ color: "white" }}>Dale hogar a estos amigos:</h3>{" "}
       </center>
@@ -113,66 +111,6 @@ const Home = () => (
       </div>
     </div>
   </React.Fragment>
-);
-
-/* Vista Admin */
-
-const Admin = () => (
-  <div>
-    &nbsp; &nbsp;
-    <center>
-      <h2 style={{ color: "white" }}>¡Hola Administrador!</h2>
-    </center>
-    <FormularioMascotaModal></FormularioMascotaModal>
-    <div className="contenedor">
-      <div className="columna">
-        <div className="perrito">
-          <img src="https://picsum.photos/id/237/400/300" alt="foto" />
-        </div>
-        &nbsp; &nbsp;
-        <center>
-          <p>Hola me llamo Fluffy, soy raza pequeña.</p>
-          &nbsp;
-          <Link to="/Editar" className="btn btn-primary">
-            Editar
-          </Link>
-          <Link to="/Editar" className="btn btn-primary">
-            Borrar
-          </Link>
-        </center>
-      </div>
-      <div className="columna">
-        <div className="perrito">
-          <img src="https://picsum.photos/id/1062/400/300" alt="foto" />
-        </div>
-        &nbsp; &nbsp;
-        <center>
-          <p>Hola me llamo Fluffy, soy raza pequeña.</p>
-          <Link to="/Editar" className="btn btn-primary">
-            Editar
-          </Link>
-          <Link to="/Editar" className="btn btn-primary">
-            Borrar
-          </Link>
-        </center>
-      </div>
-      <div className="columna">
-        <div className="perrito">
-          <img src="https://picsum.photos/id/659/400/300" alt="foto" />
-        </div>
-        &nbsp; &nbsp;
-        <center>
-          <p>Hola me llamo Fluffy, soy raza pequeña.</p>
-          <Link to="/Editar" className="btn btn-primary">
-            Editar
-          </Link>
-          <Link to="/Editar" className="btn btn-primary">
-            Borrar
-          </Link>
-        </center>
-      </div>
-    </div>
-  </div>
 );
 
 /* Menú y Rutas */

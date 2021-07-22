@@ -21,8 +21,7 @@ export default class VerMascota extends Component {
       })
       .catch((error) => {
         console.log(error);
-      }); 
-    console.log(this.state.mascotas);  
+      });
   }
 
   DataCard() {
@@ -34,8 +33,13 @@ export default class VerMascota extends Component {
   render() {
     return (
       <>
-        <Row xs={1} md={2} className="g-4 justify-content-md-center">
-        {this.DataCard()}
+        <Row
+          xs={1}
+          md={2}
+          className="g-4 justify-content-center mb-2"
+          style={{marginRight: 0}}
+        >
+          {this.DataCard()}
         </Row>
       </>
     );
