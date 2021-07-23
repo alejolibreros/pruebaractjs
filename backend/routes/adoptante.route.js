@@ -8,7 +8,7 @@ let Adoptante = require("../models/Adoptante");
 
 /*Get lista de datos*/
 router.route('/lista_adoptantes').get(Adoptante.Adoptante_list = function(req, res, next){
-    res.render(adoptantes: Adoptante.allAdop);
+    res.render(Adoptante.allAdop);
 })
 
 //Luego hacemos la creacion del adoptante
