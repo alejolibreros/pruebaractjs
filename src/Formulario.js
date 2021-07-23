@@ -20,7 +20,8 @@ function Formulario() {
            <p>Hola me llamo Fluffy, soy raza pequeña, para adoptarme llena el siguiente formulario.
              </p>
             &nbsp;
-            
+            <input type="text" placeholder="Cedula" className="inputformulario"/>
+             <br/>
              <input type="text" placeholder="Nombre" className="inputformulario"/>
              <br/>
             <input type="text" placeholder="Apellido" className="inputformulario"/>
