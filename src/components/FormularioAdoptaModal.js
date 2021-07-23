@@ -47,9 +47,9 @@ export default class FormularioAdoptaModal extends Component {
     console.log(`Adoptante creado!`);
     console.log(adoptaObject);
 
-    /* axios
-      .post("http://localhost:4000/mascotas/crear-mascota", adoptaObject)
-      .then((res) => console.log(res.data)); */
+    axios
+      .post("http://localhost:4000/mascotas/lista_crear", adoptaObject)
+      .then((res) => console.log(res.data)); 
 
     this.setState({
       name: "",

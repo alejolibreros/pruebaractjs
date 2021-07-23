@@ -12,7 +12,7 @@ router.route('/lista_adoptantes').get(Adoptante.Adoptante_list = function(req, r
 })
 
 //Luego hacemos la creacion del adoptante
-router.route('/lista_adoptantes').post(Adoptante.adoptante_create_post = function(req, res, next){
+router.route('/lista_crear').post(Adoptante.adoptante_create_post = function(req, res, next){
     var adopta = new Adoptante(req.body.cedula, req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo);
     Adoptante.add(adopta);
     

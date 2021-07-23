@@ -12,9 +12,7 @@ Adoptante.prototype.toString = function(){
 
 // Aqui va la informacion de los adoptantes para evitar hacer uso de base de datos 
 Adoptante.allAdop = [];
-Adoptante.add = function(aAdopt){
-    Adoptante.allAdop.push(aAdopt);
-}
+
 
 var a = new Adoptante(1023456789,Juan, 'Hernandez', 3124778888, 'juanh@correo.co' );
 var b = new Adoptante(12345678, David, 'blanca', 65487/744, 'davidb@correo.co' );
