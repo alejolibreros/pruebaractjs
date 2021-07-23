@@ -18,3 +18,5 @@ router.route('/lista_adoptantes').post(Adoptante.adoptante_create_post = functio
     
     res.redirect('/lista_adoptante');
 })
+
+module.exports = router;
