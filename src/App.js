@@ -1,10 +1,9 @@
 // src/App.js
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import { BrowserRouter as Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 import Login from "./Login";
-import DemoCarousel from "./components/carousel";
 import Formulario from "./Formulario";
 import Editar from "./Editar";
 import HomeAdmin from "./components/home-admin.component";
@@ -15,9 +14,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/estilo.css";
 
 import logoFoto from "./assets/img/logo.jpg";
+import HomeVista from "./components/home-vista.component";
 
 /* Vista Home  */
-const Home = () => (
+/* const Home = () => (
   <React.Fragment>
     <DemoCarousel />
 
@@ -112,7 +112,7 @@ const Home = () => (
     </div>
   </React.Fragment>
 );
-
+ */
 /* Menú y Rutas */
 
 export default function App() {
@@ -134,7 +134,7 @@ export default function App() {
       </Navbar>
 
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={HomeVista} />
         <Route path="/editar-mascota/:id" component={EditarMascota} />
         <Route path="/Formulario" component={Formulario} />
         <Route path="/Editar" component={Editar} />

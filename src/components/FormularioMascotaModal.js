@@ -157,7 +157,7 @@ export default class FormularioMascotaModal extends Component {
                   <Form.Group controlId="Edad">
                     <Form.Control
                       type="number"
-                      placeholder="Edad"
+                      placeholder="Edad (Años)"
                       value={this.state.edad}
                       onChange={this.onChangeMascotaEdad}
                       autoComplete="off"

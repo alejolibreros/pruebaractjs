@@ -147,6 +147,7 @@ export default class EditarMascota extends Component {
                     as="select"
                     value={this.state.sexo}
                     onChange={this.onChangeMascotaSexo}
+                    className="rounded"
                   >
                     <option>Sexo</option>
                     <option value="Macho">Macho</option>
@@ -160,7 +161,7 @@ export default class EditarMascota extends Component {
                 <Form.Group controlId="Edad">
                   <Form.Control
                     type="number"
-                    placeholder="Edad"
+                    placeholder="Edad (Años)"
                     value={this.state.edad}
                     onChange={this.onChangeMascotaEdad}
                     autoComplete="off"
