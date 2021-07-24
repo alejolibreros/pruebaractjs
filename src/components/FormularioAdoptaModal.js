@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-/* import axios from "axios"; */
+import axios from "axios";
 import { Button, Form, Modal } from "react-bootstrap";
 
 export default class FormularioAdoptaModal extends Component {
@@ -10,7 +10,7 @@ export default class FormularioAdoptaModal extends Component {
     this.onChangeAdoptaNombre = this.onChangeAdoptaNombre.bind(this);
     this.onChangeAdoptaTelefono = this.onChangeAdoptaTelefono.bind(this);
     this.onChangeAdoptaCorreo = this.onChangeAdoptaCorreo.bind(this);
-
+    this.onChangeAdoptaMascota = this.onChangeAdoptaMascota.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -20,6 +20,7 @@ export default class FormularioAdoptaModal extends Component {
       name: "",
       telefono: "",
       correo: "",
+      mascota:"",
       isOpen: false,
     };
   }
@@ -35,6 +36,10 @@ export default class FormularioAdoptaModal extends Component {
   onChangeAdoptaCorreo(e) {
     this.setState({ correo: e.target.value });
   }
+  
+  onChangeAdoptaMascota(e) {
+    this.setState({ mascota: e.target.value });
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -43,6 +48,7 @@ export default class FormularioAdoptaModal extends Component {
       name: this.state.name,
       telefono: this.state.telefono,
       correo: this.state.correo,
+      mascota: this.state.mascota,
     };
     console.log(`Adoptante creado!`);
     console.log(adoptaObject);
@@ -55,6 +61,7 @@ export default class FormularioAdoptaModal extends Component {
       name: "",
       telefono: "",
       correo: "",
+      mascota: "",
     });
   }
 
@@ -67,6 +74,7 @@ export default class FormularioAdoptaModal extends Component {
       name: "",
       telefono: "",
       correo: "",
+      mascota: "",
       isOpen: false,
     });
   }
@@ -119,9 +127,20 @@ export default class FormularioAdoptaModal extends Component {
               <Form.Group controlId="Correo" className="mt-3">
                 <Form.Control
                   type="email"
-                  placeholder="Correo"
+                  placeholder="@ Correo electrónico"
                   value={this.state.correo}
                   onChange={this.onChangeAdoptaCorreo}
+                  autoComplete="off"
+                  required
+                />
+              </Form.Group>
+             
+              <Form.Group controlId="Mascota" className="mt-3">
+                <Form.Control
+                  type="text"
+                  placeholder="Nombre de la Mascota"
+                  value={this.state.mascota}
+                  onChange={this.onChangeAdoptaMascota}
                   autoComplete="off"
                   required
                 />
