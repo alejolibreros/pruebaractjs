@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Button, Form, Modal } from "react-bootstrap";
+import { saveAdoptantes } from './services'
 
 export default class FormularioAdoptaModal extends Component {
   constructor(props) {
@@ -46,11 +46,8 @@ export default class FormularioAdoptaModal extends Component {
       mascota: this.props.nameMascota,
     };
     
-    console.log(adoptaObject);
 
-    axios
-      .post("http://localhost:4000/adopta/crear-adoptante", adoptaObject)
-      .then((res) => console.log(res.data)); 
+    saveAdoptantes(adoptaObject)
 
     this.setState({
       name: "",
@@ -93,7 +90,7 @@ export default class FormularioAdoptaModal extends Component {
           centered
         >
           <Modal.Header className="justify-content-center">
-            <Modal.Title>Formulario de Adopción</Modal.Title>
+            <Modal.Title>Formulario de Adopción de {this.props.nameMascota}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>

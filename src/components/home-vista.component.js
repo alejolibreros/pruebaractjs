@@ -1,28 +1,35 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 import DemoCarousel from "./carousel";
 import HomeMascotaCard from "./HomeMascotaCard";
+import { getMascotas } from "./services";
 
 export default class HomeVista extends Component {
   constructor(props) {
     super(props);
     this.state = {
       mascotas: [],
+      isLoading: true,
     };
+    this.loadMascotas = this.loadMascotas.bind(this);
+  }
+
+  async loadMascotas() {
+    const response = await getMascotas();
+
+    if (response.status === 200) {
+      this.setState({
+        mascotas: response.data,
+      });
+    }
+
+    this.setState({
+      isLoading: false,
+    });
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:4000/mascotas/ver-mascota")
-      .then((res) => {
-        this.setState({
-          mascotas: res.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.loadMascotas()
   }
 
   DataCard() {
@@ -40,24 +47,37 @@ export default class HomeVista extends Component {
             Somos un proyecto social para dar hogar a gatos y perros que no lo
             tienen. Tú puedes cambiar una vida, anímate.
           </p>
-          <h3 style={{ color: "white" }}>Dale hogar a estos amigos</h3>{" "}
+          <h3 style={{ color: "white" }}>Dale hogar a estos amigos</h3>
         </center>
-        <Row
-          xs={1}
-          md={2}
-          className="g-4 justify-content-center mb-2"
-          style={{ marginRight: 0 }}
-        >
-          {this.DataCard()}
-        </Row>
-        <center className="mt-5"> 
+
+        {this.state.isLoading && (
+          <div className="d-flex  justify-content-center mb-3 mt-5">
+            <Spinner animation="grow" />
+          </div>
+        )}
+        {!this.state.isLoading && !this.state.mascotas.length && (
+          <center className="d-flex  justify-content-center mb-3">
+            <h3 style={{ color: "white" }}>No hay mascotas registradas...</h3>
+          </center>
+        )}
+        {!this.state.isLoading && this.state.mascotas.length && (
+          <Row
+            xs={1}
+            md={2}
+            className="g-4 justify-content-center mt-2"
+            style={{ marginRight: 0 }}
+          >
+            {this.DataCard()}
+          </Row>
+        )}
+
+        <center className="mt-4">
           <h3 style={{ color: "white" }}>Contáctanos</h3>{" "}
         </center>
-        &nbsp; &nbsp;
-        <div className="contenedor">
+        
+        <div className="contenedor mt-4">
           <div className="columna31">
-            &nbsp; &nbsp;
-            <div className="logo2"></div>
+            <div className="logo2 mt-5"></div>
             &nbsp; &nbsp;
             <center>
               <h3 style={{ color: "white" }}>Datos de contacto</h3>

@@ -3,17 +3,15 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
-import Login from "./Login";
-import PrivateRoute from "./PrivateRoute";
-import HomeAdmin from "./components/home-admin.component";
-import EditarMascota from "./components/editar-mascota.component";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/estilo.css";
 
-import logoFoto from "./assets/img/logo.jpg";
+import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
+import HomeAdmin from "./components/home-admin.component";
 import HomeVista from "./components/home-vista.component";
 import VistaAdoptantes from "./components/vista-adoptantes.component";
+import logoFoto from "./assets/img/logo.jpg";
 
 // Menú y Rutas
 export default function App() {
@@ -36,7 +34,6 @@ export default function App() {
 
       <Switch>
         <Route exact path="/" component={HomeVista} />
-        <Route path="/editar-mascota/:id" component={EditarMascota} />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/admin" component={HomeAdmin} />
         <Route path="/ver-adoptante" component={VistaAdoptantes} />
