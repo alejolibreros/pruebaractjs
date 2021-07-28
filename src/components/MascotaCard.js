@@ -1,58 +1,74 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Button, Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Modal } from "react-bootstrap";
+import EditarMascotaModal from "./EditarMascotaModal";
 
-export default class MascotaCard extends Component {
-  constructor(props) {
-    super(props);
-    this.eliminarMascota = this.eliminarMascota.bind(this);
-  }
+const MascotaCard = (props) => {
+  const [show, setShow] = useState(false);
 
-  eliminarMascota() {
-    console.log("Eliminado");
-    axios
-      .put(
-        "http://localhost:4000/mascotas/eliminar-mascota/" + this.props.obj._id
-      )
-      .then((res) => {
-        console.log("Actualización de estado exitosa!");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  render() {
-    return (
-      <>
-        <Card style={{ width: "18rem" }}>
-          <Card.Header>{this.props.obj.name}</Card.Header>
-          <Card.Img
-            variant="top"
-            width={170}
-            height={150}
-            alt="171x180"
-            src={this.props.obj.foto}
-          />
-          <Card.Body>
-            <Card.Text>
-              {this.props.obj.descripcion}, tiene {this.props.obj.edad} años, es{" "}
-              {this.props.obj.sexo}, de tamaño {this.props.obj.tamanho}.
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer className="text-center">
-            <Button
-              href={"/editar-mascota/" + this.props.obj._id}
-              variant="success"
-            >
-              Editar
-            </Button>
-            <Button onClick={this.eliminarMascota} variant="danger">
-              Eliminar
-            </Button>
-          </Card.Footer>
-        </Card>
-      </>
-    );
-  }
-}
+  const eliminarMascota = () => {
+    props.onDelete(props.obj._id);
+  };
+
+  const actualizarMascota = (mascotaId, mascota) => {
+    props.onUpdate(mascotaId, mascota);
+    handleClose();
+  };
+
+  return (
+    <>
+      <Card style={{ width: "18rem" }}>
+        <Card.Header>{props.obj.name}</Card.Header>
+        <Card.Img
+          variant="top"
+          width={170}
+          height={150}
+          alt="171x180"
+          src={props.obj.foto}
+        />
+        <Card.Body>
+          <Card.Text>
+            {props.obj.descripcion}, tiene {props.obj.edad} años, es{" "}
+            {props.obj.sexo}, de tamaño {props.obj.tamanho}.
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer className="text-center">
+          <Button variant="success" onClick={handleShow}>
+            Editar
+          </Button>
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            size="lg"
+            backdrop="static"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header className="justify-content-center">
+              <Modal.Title>EDITAR MASCOTA</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Modal.Body>
+                <EditarMascotaModal
+                  estado={show}
+                  mascotaId={props.obj._id}
+                  actualizarMascota={actualizarMascota}
+                  handleClose={handleClose}
+                />
+              </Modal.Body>
+            </Modal.Body>
+          </Modal>
+
+          <Button onClick={eliminarMascota} variant="danger">
+            Eliminar
+          </Button>
+        </Card.Footer>
+      </Card>
+    </>
+  );
+};
+
+export default MascotaCard;

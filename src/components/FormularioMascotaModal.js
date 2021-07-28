@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default class FormularioMascotaModal extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class FormularioMascotaModal extends Component {
     this.onChangeMascotaSexo = this.onChangeMascotaSexo.bind(this);
     this.onChangeMascotaTamanho = this.onChangeMascotaTamanho.bind(this);
     this.onChangeMascotaEdad = this.onChangeMascotaEdad.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
@@ -52,7 +52,7 @@ export default class FormularioMascotaModal extends Component {
     this.setState({ edad: e.target.value });
   }
 
-  onSubmit(e) {
+  _onSubmit(e) {
     e.preventDefault();
     const mascotaObject = new FormData();
 
@@ -64,9 +64,7 @@ export default class FormularioMascotaModal extends Component {
     mascotaObject.append("edad", this.state.edad);
     mascotaObject.append("estado", this.state.estado);
 
-    axios
-      .post("http://localhost:4000/mascotas/crear-mascota", mascotaObject)
-      .then((res) => console.log(res.data));
+    this.props.onSubmit(mascotaObject);
 
     this.fileInput.current.value = "";
 
@@ -106,6 +104,9 @@ export default class FormularioMascotaModal extends Component {
           <Button variant="primary" onClick={this.openModal}>
             Agregar Mascota
           </Button>
+          <Link to="/ver-adoptante">
+            <Button variant="primary">Ver adoptantes</Button>
+          </Link>
         </div>
 
         <Modal
@@ -121,7 +122,7 @@ export default class FormularioMascotaModal extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this._onSubmit}>
               <Row>
                 <Col>
                   <Form.Group controlId="Name" className="">

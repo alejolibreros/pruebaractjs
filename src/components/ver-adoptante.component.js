@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Row } from "react-bootstrap";
 import AdoptanteCard from "./AdoptanteCard";
+import { getAdoptantes } from './services'
 
 export default class VerAdoptante extends Component {
   constructor(props) {
@@ -9,19 +9,21 @@ export default class VerAdoptante extends Component {
     this.state = {
       adoptantes: [],
     };
+    this.loadAdoptantes = this.loadAdoptantes.bind(this);
+  }
+
+  async loadAdoptantes() {
+    const response = await getAdoptantes();
+
+    if (response.status === 200) {
+      this.setState({
+        adoptantes: response.data,
+      });
+    }
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:4000/adopta/ver-adoptante")
-      .then((res) => {
-        this.setState({
-          adoptantes: res.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.loadAdoptantes()
   }
 
   DataCard() {
