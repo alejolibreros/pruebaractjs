@@ -1,3 +1,4 @@
+require('dotenv').config()
 let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
@@ -9,16 +10,22 @@ const mascotaRoute = require("../backend/routes/mascota.route")
 const adoptaRoute = require('../backend/routes/adoptante.route')
 
 // Connecting mongoDB Database
-mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
-  useNewUrlParser: true
-}).then(() => {
-  console.log('Database sucessfully connected!')
-},
-  error => {
-    console.log('Could not connect to database : ' + error)
-  }
-)
+// mongoose.Promise = global.Promise;
+// mongoose.connect(dbConfig.db, {
+//   useNewUrlParser: true
+// }).then(() => {
+//   console.log('Database sucessfully connected!')
+// },
+//   error => {
+//     console.log('Could not connect to database : ' + error)
+//   }
+// )
+const db = require("./config/keys").mongoURI;
+// Connect to MongoDB
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch((err) => console.log(err));
 
 const app = express();
 app.use(bodyParser.json());
