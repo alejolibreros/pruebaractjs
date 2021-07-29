@@ -6,8 +6,8 @@ import { Link, Route, Switch } from "react-router-dom";
 function VistaAdoptantes() {
   return (
     <div>
-      <center>
-        <h2 style={{ color: "white" }}>Lista de adoptantes:</h2>
+      <center className="mt-3 mb-2">
+        <h2 style={{ color: "white" }}>Lista de adoptantes</h2>
         &nbsp; &nbsp;
         <Link to="/admin" className="btn btn-primary">
           Regresar

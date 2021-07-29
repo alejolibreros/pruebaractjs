@@ -76,6 +76,7 @@ export default class FormularioMascotaModal extends Component {
       tamanho: "",
       edad: "",
       estado: "No Adoptado",
+      isOpen: false,
     });
   }
 
