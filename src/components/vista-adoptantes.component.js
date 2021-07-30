@@ -9,7 +9,7 @@ function VistaAdoptantes() {
       <center className="mt-3 mb-2">
         <h2 style={{ color: "white" }}>Lista de adoptantes</h2>
         &nbsp; &nbsp;
-        <Link to="/admin" className="btn btn-primary">
+        <Link to="/dashboard" className="btn btn-primary">
           Regresar
         </Link>
       </center>

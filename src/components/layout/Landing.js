@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Row, Spinner } from "react-bootstrap";
-import DemoCarousel from "./carousel";
-import HomeMascotaCard from "./HomeMascotaCard";
-import { getMascotas } from "./services";
+import DemoCarousel from "./Carousel";
+import HomeMascotaCard from "../HomeMascotaCard";
+import { getMascotas } from "../services";
 
-export default class HomeVista extends Component {
+class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ export default class HomeVista extends Component {
   }
 
   componentDidMount() {
-    this.loadMascotas()
+    this.loadMascotas();
   }
 
   DataCard() {
@@ -74,7 +74,7 @@ export default class HomeVista extends Component {
         <center className="mt-4">
           <h3 style={{ color: "white" }}>Contáctanos</h3>{" "}
         </center>
-        
+
         <div className="contenedor mt-4">
           <div className="columna31">
             <div className="logo2 mt-5"></div>
@@ -111,3 +111,5 @@ export default class HomeVista extends Component {
     );
   }
 }
+
+export default Landing;
