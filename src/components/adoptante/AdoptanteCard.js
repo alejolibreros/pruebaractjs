@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
-import logoFoto from "../assets/img/logo2.jpg";
+import logoFoto from "../../assets/img/logo2.jpg";
 
 export default class AdoptanteCard extends Component {
   render() {
@@ -29,18 +29,3 @@ export default class AdoptanteCard extends Component {
     );
   }
 }
-
-/*
-name: {
-  type: String,
-},
-telefono: {
-  type: Number,
-},
-correo: {
-  type: String,
-},
-mascota: {
-  type: String,
-},
-*/

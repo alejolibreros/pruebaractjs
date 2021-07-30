@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Spinner } from "react-bootstrap";
 import DemoCarousel from "./Carousel";
-import HomeMascotaCard from "../HomeMascotaCard";
+import HomeMascotaCard from "./HomeMascotaCard";
 import { getMascotas } from "../services";
 
 class Landing extends Component {

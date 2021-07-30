@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
-import { getOneMascota } from "./services";
+import { getOneMascota } from "../services";
 
 export default class EditarMascotaModal extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { saveAdoptantes } from './services'
+import { saveAdoptantes } from '../services'
 
 export default class FormularioAdoptaModal extends Component {
   constructor(props) {

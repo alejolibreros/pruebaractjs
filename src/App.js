@@ -14,7 +14,7 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import VistaAdoptantes from "./components/vista-adoptantes.component";
+import VistaAdoptantes from "./components/adoptante/vista-adoptantes.component";
 import Dashboard from "./components/dashboard/Dashboard";
 
 // Check for token to keep user logged in

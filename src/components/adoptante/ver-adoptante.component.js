@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row } from "react-bootstrap";
 import AdoptanteCard from "./AdoptanteCard";
-import { getAdoptantes } from './services'
+import { getAdoptantes } from '../services'
 
 export default class VerAdoptante extends Component {
   constructor(props) {

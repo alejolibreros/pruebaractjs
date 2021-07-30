@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import FormularioMascotaModal from "../FormularioMascotaModal";
-import ListarMascotas from "../ListarMascota";
+import FormularioMascotaModal from "./FormularioMascotaModal";
+import ListarMascotas from "./ListarMascota";
 import { Spinner } from "react-bootstrap";
 import {
   saveMascota,
