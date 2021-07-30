@@ -16,6 +16,7 @@ export default class FormularioMascotaModal extends Component {
     this._onSubmit = this._onSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this._onLogoutClick = this._onLogoutClick.bind(this);
 
     this.fileInput = React.createRef();
 
@@ -76,6 +77,7 @@ export default class FormularioMascotaModal extends Component {
       tamanho: "",
       edad: "",
       estado: "No Adoptado",
+      isOpen: false,
     });
   }
 
@@ -97,6 +99,10 @@ export default class FormularioMascotaModal extends Component {
     });
   }
 
+  _onLogoutClick() {
+    this.props.onLogoutClick();
+  }
+
   render() {
     return (
       <>
@@ -107,6 +113,9 @@ export default class FormularioMascotaModal extends Component {
           <Link to="/ver-adoptante">
             <Button variant="primary">Ver adoptantes</Button>
           </Link>
+          <Button variant="danger" onClick={this._onLogoutClick}>
+            Cerrar sesión
+          </Button>
         </div>
 
         <Modal

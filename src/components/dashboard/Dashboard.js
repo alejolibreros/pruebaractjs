@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 import FormularioMascotaModal from "./FormularioMascotaModal";
 import ListarMascotas from "./ListarMascota";
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from "react-bootstrap";
 import {
   saveMascota,
   getMascotas,
   deleteMascota,
   updateMascota,
-} from "./services";
+} from "../services";
 
-const HomeAdmin = () => {
+const Dashboard = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [mascotas, setMascotas] = useState([]);
 
@@ -38,22 +41,30 @@ const HomeAdmin = () => {
   };
 
   const onUpdate = async (idMascota, data) => {
-    await updateMascota(idMascota, data)
+    await updateMascota(idMascota, data);
     loadMascotas();
+  };
+
+  const { user } = props.auth;
+
+  const onLogoutClick = () => {
+    props.logoutUser();
   };
 
   return (
     <div className="form-wrapper">
       <center className="mt-2">
-        <h2 style={{ color: "white" }}>¡Hola Administrador!</h2>
+        <h2 style={{ color: "white" }}>
+          ¡Hola Administrador {user.name.split(" ")[0]}!
+        </h2>
       </center>
 
-      <FormularioMascotaModal onSubmit={onSubmit} />
+      <FormularioMascotaModal onSubmit={onSubmit} onLogoutClick={onLogoutClick} />
 
       {isLoading && (
         <div className="d-flex  justify-content-center mb-3">
           <Spinner animation="grow" />
-      </div>
+        </div>
       )}
 
       {!isLoading && !mascotas.length && (
@@ -73,4 +84,13 @@ const HomeAdmin = () => {
   );
 };
 
-export default HomeAdmin;
+Dashboard.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Dashboard);

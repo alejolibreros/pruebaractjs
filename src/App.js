@@ -1,43 +1,65 @@
-// src/App.js
-import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { Provider } from "react-redux";
+import store from "./store";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/estilo.css";
 
-import Login from "./Login";
-import PrivateRoute from "./PrivateRoute";
-import HomeAdmin from "./components/home-admin.component";
-import HomeVista from "./components/home-vista.component";
-import VistaAdoptantes from "./components/vista-adoptantes.component";
-import logoFoto from "./assets/img/logo.jpg";
+import NavbarComponent from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import PrivateRoute from "./components/private-route/PrivateRoute";
+import VistaAdoptantes from "./components/adoptante/vista-adoptantes.component";
+import Dashboard from "./components/dashboard/Dashboard";
+
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Redirect to login
+    window.location.href = "./login";
+  }
+}
 
 // Menú y Rutas
-export default function App() {
-  return (
-    <div>
-      <Navbar collapseOnSelect expand="lg">
-        <Navbar.Brand href="/">
-          <img src={logoFoto} alt="Logo"></img>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse
-          id="responsive-navbar-nav"
-          className="justify-content-end"
-        >
-          <Nav>
-            <Nav.Link href="/admin">Login</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
-      <Switch>
-        <Route exact path="/" component={HomeVista} />
-        <Route path="/login" component={Login} />
-        <PrivateRoute path="/admin" component={HomeAdmin} />
-        <Route path="/ver-adoptante" component={VistaAdoptantes} />
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <NavbarComponent />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute
+                exact
+                path="/ver-adoptante"
+                component={VistaAdoptantes}
+              />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
+    );
+  }
 }
+
+export default App;
