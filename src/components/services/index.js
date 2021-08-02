@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:4000/";
+const baseUrl = "https://secret-savannah-77380.herokuapp.com/";
 
 export async function getMascotas() {
   try {
