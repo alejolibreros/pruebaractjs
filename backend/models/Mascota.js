@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { appConfig } = require('../config')
 
 let mascotaSchema = new Schema(
   {
@@ -30,10 +29,5 @@ let mascotaSchema = new Schema(
     collection: "mascotas",
   }
 );
-
-mascotaSchema.methods.setFotoUrl = function setFotoUrl(filename){
-  const { host, port } = appConfig
-  this.foto = `${host}:${port}/public/${filename}`
-}
 
 module.exports = mongoose.model("Mascota", mascotaSchema);

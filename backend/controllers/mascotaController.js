@@ -1,25 +1,34 @@
 const Mascota = require("../models/Mascota");
+const cloudinary = require("cloudinary");
+const { cloudinaryConfig } = require("../config");
+
+cloudinary.config({
+  cloud_name: cloudinaryConfig.cloud_name,
+  api_key: cloudinaryConfig.api_key,
+  api_secret: cloudinaryConfig.api_secret,
+});
+
+const fs = require("fs-extra");
 
 // Añadir una mascota
 async function addMascota(req, res) {
   try {
     const { name, descripcion, sexo, tamanho, edad, estado } = req.body;
 
+    const result = await cloudinary.v2.uploader.upload(req.file.path);
+
     const mascota = Mascota({
       name,
       descripcion,
+      foto: result.url,
       sexo,
       tamanho,
       edad,
       estado,
     });
 
-    if (req.file) {
-      const { filename } = req.file;
-      mascota.setFotoUrl(filename);
-    }
-
     const mascotaStored = await mascota.save();
+    await fs.unlink(req.file.path); // Elimina la foto
 
     res.status(201).send({ mascotaStored });
   } catch (e) {
@@ -55,11 +64,15 @@ async function updateMascota(req, res) {
     mascotaID.estado = estado;
 
     if (req.file) {
-      const { filename } = req.file;
-      mascotaID.setFotoUrl(filename);
-    }
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      mascotaID.foto = result.url;
 
-    res.status(200).send(await mascotaID.save());
+      await fs.unlink(req.file.path); // Elimina la foto
+
+      res.status(200).send(await mascotaID.save());
+    } else {
+      res.status(200).send(await mascotaID.save());
+    }
   } catch (e) {
     res.status(500).send({ message: e.message });
   }
