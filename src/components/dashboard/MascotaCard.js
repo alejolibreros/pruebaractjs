@@ -26,7 +26,7 @@ const MascotaCard = (props) => {
           width={170}
           height={150}
           alt="171x180"
-          src={`data:${props.obj.imagen.contentType};base64,${props.obj.imagen.data}`}
+          src={props.obj.foto}
         />
         <Card.Body>
           <Card.Text>

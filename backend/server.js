@@ -4,7 +4,6 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 const passport = require("passport");
-const upload = require("express-fileupload");
 
 // Express Route
 const users = require("./routes/users");
@@ -19,7 +18,6 @@ mongoose
   .catch((err) => console.log(err));
 
 const app = express();
-app.use(upload());
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -27,7 +25,6 @@ app.use(
   })
 );
 app.use(cors());
-app.use("/public", express.static(`${__dirname}/storage/imgs`));
 app.use("/mascotas", mascotaRoute);
 app.use("/adopta", adoptaRoute);
 // Passport middleware
