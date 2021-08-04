@@ -62,18 +62,17 @@ async function updateMascota(req, res) {
     mascotaID.tamanho = tamanho;
     mascotaID.edad = edad;
     mascotaID.estado = estado;
-    
+
     if (req.file) {
       const result = await cloudinary.v2.uploader.upload(req.file.path);
       mascotaID.foto = result.url;
 
       await fs.unlink(req.file.path); // Elimina la foto
-      
+
       res.status(200).send(await mascotaID.save());
     } else {
       res.status(200).send(await mascotaID.save());
     }
-
   } catch (e) {
     res.status(500).send({ message: e.message });
   }
