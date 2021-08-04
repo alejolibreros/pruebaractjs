@@ -13,7 +13,7 @@ export default class HomeMascotaCard extends Component {
             width={170}
             height={150}
             alt="171x180"
-            src={this.props.obj.foto}
+            src={`data:${this.props.obj.imagen.contentType};base64,${this.props.obj.imagen.data}`}
           />
           <Card.Body>
             <Card.Text>

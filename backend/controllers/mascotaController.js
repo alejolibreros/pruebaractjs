@@ -14,10 +14,8 @@ async function addMascota(req, res) {
       estado,
     });
 
-    if (req.file) {
-      const { filename } = req.file;
-      mascota.setFotoUrl(filename);
-    }
+    mascota.imagen.data = req.files.foto.data;
+    mascota.imagen.contentType = req.files.foto.mimetype;
 
     const mascotaStored = await mascota.save();
 
@@ -53,13 +51,15 @@ async function updateMascota(req, res) {
     mascotaID.tamanho = tamanho;
     mascotaID.edad = edad;
     mascotaID.estado = estado;
-
-    if (req.file) {
-      const { filename } = req.file;
-      mascotaID.setFotoUrl(filename);
+    
+    if (req.files !== null) {
+      mascotaID.imagen.data = req.files.foto.data;
+      mascotaID.imagen.contentType = req.files.foto.mimetype;
+      res.status(200).send(await mascotaID.save());
+    } else {
+      res.status(200).send(await mascotaID.save());
     }
-
-    res.status(200).send(await mascotaID.save());
+    
   } catch (e) {
     res.status(500).send({ message: e.message });
   }
