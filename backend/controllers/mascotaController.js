@@ -21,6 +21,7 @@ async function addMascota(req, res) {
       name,
       descripcion,
       foto: result.url,
+      imgPublic_id: result.public_id,
       sexo,
       tamanho,
       edad,
@@ -28,7 +29,7 @@ async function addMascota(req, res) {
     });
 
     const mascotaStored = await mascota.save();
-    await fs.unlink(req.file.path); // Elimina la foto
+    await fs.unlink(req.file.path); // Elimina la foto de la carpeta
 
     res.status(201).send({ mascotaStored });
   } catch (e) {
@@ -63,11 +64,17 @@ async function updateMascota(req, res) {
     mascotaID.edad = edad;
     mascotaID.estado = estado;
 
+    // Validar si existe una imagen en el request
     if (req.file) {
+      // Elimina antigua foto de Cloudinary
+      await cloudinary.v2.uploader.destroy(mascotaID.imgPublic_id);
+      // Crear nueva foto
       const result = await cloudinary.v2.uploader.upload(req.file.path);
-      mascotaID.foto = result.url;
 
-      await fs.unlink(req.file.path); // Elimina la foto
+      mascotaID.foto = result.url;
+      mascotaID.imgPublic_id = result.public_id;
+
+      await fs.unlink(req.file.path); // Elimina la foto de la carpeta 
 
       res.status(200).send(await mascotaID.save());
     } else {
