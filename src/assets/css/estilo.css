@@ -324,6 +324,10 @@ p {
  border-radius: 22px!important; 
 }
 
+p.legend{
+  background-color: rgba(0, 0, 0, 0.747); 
+ border-radius: 22px!important; 
+}
 
 
 .card {

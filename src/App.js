@@ -17,21 +17,21 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import VistaAdoptantes from "./components/adoptante/vista-adoptantes.component";
 import Dashboard from "./components/dashboard/Dashboard";
 
-// Check for token to keep user logged in
+// Verificar el token para mantener al usuario conectado
 if (localStorage.jwtToken) {
-  // Set auth token header auth
+  // Establecer la autenticación del encabezado del token de autenticación
   const token = localStorage.jwtToken;
   setAuthToken(token);
-  // Decode token and get user info and exp
+  // Decodificar token y obtener información de usuario y vencimiento
   const decoded = jwt_decode(token);
-  // Set user and isAuthenticated
+  // Establecer usuario y isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-  // Check for expired token
+  // Compruebe si hay token caducado
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
-    // Logout user
+    // Cerrar sesión de usuario
     store.dispatch(logoutUser());
-    // Redirect to login
+    // Redirigir para iniciar sesión 
     window.location.href = "./login";
   }
 }
