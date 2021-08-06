@@ -10,7 +10,6 @@ router.route("/crear-adoptante").post((req, res, next) => {
     if (error) {
       return next(error);
     } else {
-      console.log(data);
       res.json(data);
     }
   });
