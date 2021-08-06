@@ -1,7 +1,7 @@
 const Mascota = require("../models/Mascota");
 const cloudinary = require("cloudinary");
 const { cloudinaryConfig } = require("../config");
-
+// Configuración servidor de imágenes Cloudinary 
 cloudinary.config({
   cloud_name: cloudinaryConfig.cloud_name,
   api_key: cloudinaryConfig.api_key,
@@ -14,7 +14,7 @@ const fs = require("fs-extra");
 async function addMascota(req, res) {
   try {
     const { name, descripcion, sexo, tamanho, edad, estado } = req.body;
-
+    // Sube la imagen al servidor de imágenes Cloudinary 
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     const mascota = Mascota({
@@ -53,9 +53,9 @@ async function updateMascota(req, res) {
   try {
     const { name, descripcion, sexo, tamanho, edad, estado } = req.body;
 
-    //Busco la mascota
+    //Busca la mascota
     const mascotaID = await Mascota.findOne({ _id: req.params.id });
-    //Actualizo sus datos
+    //Actualiza datos
     mascotaID.name = name;
     mascotaID.descripcion = descripcion;
     mascotaID.sexo = sexo;

@@ -6,7 +6,7 @@ export default class FormularioMascotaModal extends Component {
   constructor(props) {
     super(props);
 
-    // Setting up functions
+    // Configuración de funciones
     this.onChangeMascotaNombre = this.onChangeMascotaNombre.bind(this);
     this.onChangeMascotaDescripcion =
       this.onChangeMascotaDescripcion.bind(this);
@@ -20,7 +20,7 @@ export default class FormularioMascotaModal extends Component {
 
     this.fileInput = React.createRef();
 
-    // Setting up state
+    // Configuración de Estado
     this.state = {
       name: "",
       descripcion: "",

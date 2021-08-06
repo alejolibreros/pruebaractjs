@@ -11,7 +11,7 @@ const mascotaRoute = require("./routes/mascota.route");
 const adoptaRoute = require("./routes/adoptante.route");
 
 const db = require("./config/keys").mongoURI;
-// Connect to MongoDB
+// Conectarse a MongoDB
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
@@ -27,9 +27,9 @@ app.use(
 app.use(cors());
 app.use("/mascotas", mascotaRoute);
 app.use("/adopta", adoptaRoute);
-// Passport middleware
+// Middleware de pasaporte
 app.use(passport.initialize());
-// Passport config
+// Configuración de pasaporte
 require("./config/passport")(passport);
 app.use("/users", users);
 

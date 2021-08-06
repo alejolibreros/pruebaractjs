@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { saveAdoptantes } from '../services'
+import { saveAdoptantes } from "../services";
 
 export default class FormularioAdoptaModal extends Component {
   constructor(props) {
     super(props);
 
-    // Setting up functions
+    // Configuración de funciones
     this.onChangeAdoptaNombre = this.onChangeAdoptaNombre.bind(this);
     this.onChangeAdoptaTelefono = this.onChangeAdoptaTelefono.bind(this);
     this.onChangeAdoptaCorreo = this.onChangeAdoptaCorreo.bind(this);
@@ -14,12 +14,12 @@ export default class FormularioAdoptaModal extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
-    // Setting up state
+    // Configuración de Estado
     this.state = {
       name: "",
       telefono: "",
       correo: "",
-      mascota:"",
+      mascota: "",
       isOpen: false,
     };
   }
@@ -45,9 +45,8 @@ export default class FormularioAdoptaModal extends Component {
       correo: this.state.correo,
       mascota: this.props.nameMascota,
     };
-    
 
-    saveAdoptantes(adoptaObject)
+    saveAdoptantes(adoptaObject);
 
     this.setState({
       name: "",
@@ -55,7 +54,7 @@ export default class FormularioAdoptaModal extends Component {
       correo: "",
       mascota: "",
     });
-    this.closeModal()
+    this.closeModal();
   }
 
   openModal() {
@@ -90,7 +89,9 @@ export default class FormularioAdoptaModal extends Component {
           centered
         >
           <Modal.Header className="justify-content-center">
-            <Modal.Title>Formulario de Adopción de {this.props.nameMascota}</Modal.Title>
+            <Modal.Title>
+              Formulario de Adopción de {this.props.nameMascota}
+            </Modal.Title>
           </Modal.Header>
 
           <Modal.Body>

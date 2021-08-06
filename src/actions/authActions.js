@@ -3,11 +3,11 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
-// Register User
+// Registrar usuario
 export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("/users/register", userData)
-    .then((res) => history.push("/login")) // re-direct to login on successful register
+    .then((res) => history.push("/login")) // redirección a iniciar sesión en el registro exitoso
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -15,20 +15,20 @@ export const registerUser = (userData, history) => (dispatch) => {
       })
     );
 };
-// Login - get user token
+// Iniciar sesión - obtener el token de usuario
 export const loginUser = (userData) => (dispatch) => {
   axios
     .post("/users/login", userData)
     .then((res) => {
-      // Save to localStorage
-      // Set token to localStorage
+      // Guardar en localStorage
+      // Establecer token en localStorage
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
+      // Establecer token en el encabezado Auth
       setAuthToken(token);
-      // Decode token to get user data
+      // Decodificar el token para obtener datos del usuario
       const decoded = jwt_decode(token);
-      // Set current user
+      // Establecer usuario actual
       dispatch(setCurrentUser(decoded));
     })
     .catch((err) =>
@@ -38,25 +38,25 @@ export const loginUser = (userData) => (dispatch) => {
       })
     );
 };
-// Set logged in user
+// Establecer usuario registrado
 export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded,
   };
 };
-// User loading
+// Carga de usuario
 export const setUserLoading = () => {
   return {
     type: USER_LOADING,
   };
 };
-// Log user out
+// Cerrar la sesión del usuario
 export const logoutUser = () => (dispatch) => {
-  // Remove token from local storage
+  // Eliminar token del almacenamiento local
   localStorage.removeItem("jwtToken");
-  // Remove auth header for future requests
+  // Eliminar el encabezado de autenticación para solicitudes futuras
   setAuthToken(false);
-  // Set current user to empty object {} which will set isAuthenticated to false
+  // Establece el usuario actual en un objeto vacío {} que establecerá isAuthenticated en falso
   dispatch(setCurrentUser({}));
 };

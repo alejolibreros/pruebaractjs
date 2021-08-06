@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
   
-// Adoptante Model
+// Modelo adoptante
 var adoptanteSchema = require("../models/Adoptante");
 
 // Crear Adoptante
@@ -27,7 +27,4 @@ router.route("/ver-adoptante").get((req, res, next) => {
   });
 });
 
-
-
 module.exports = router;
-
