@@ -6,7 +6,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Registrar usuario
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("/users/register", userData)
+    .post("https://secret-savannah-77380.herokuapp.com/users/register", userData)
     .then((res) => history.push("/login")) // redirección a iniciar sesión en el registro exitoso
     .catch((err) =>
       dispatch({
@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // Iniciar sesión - obtener el token de usuario
 export const loginUser = (userData) => (dispatch) => {
   axios
-    .post("/users/login", userData)
+    .post("https://secret-savannah-77380.herokuapp.com/users/login", userData)
     .then((res) => {
       // Guardar en localStorage
       // Establecer token en localStorage

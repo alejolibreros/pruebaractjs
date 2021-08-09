@@ -125,8 +125,9 @@ export default class EditarMascotaModal extends Component {
                   as="select"
                   value={this.state.sexo}
                   onChange={this.onChangeMascotaSexo}
+                  required
                 >
-                  <option>Sexo</option>
+                  <option value="">Sexo</option>
                   <option value="Macho">Macho</option>
                   <option value="Hembra">Hembra</option>
                 </Form.Control>
@@ -139,6 +140,8 @@ export default class EditarMascotaModal extends Component {
                 <Form.Control
                   type="number"
                   placeholder="Edad"
+                  min="0"
+                  max="20"
                   value={this.state.edad}
                   onChange={this.onChangeMascotaEdad}
                   autoComplete="off"
@@ -152,8 +155,10 @@ export default class EditarMascotaModal extends Component {
                   as="select"
                   value={this.state.tamanho}
                   onChange={this.onChangeMascotaTamanho}
+                  placeholder="select"
+                  required
                 >
-                  <option>Tamaño</option>
+                  <option value="">Tamaño</option>
                   <option value="Grande">Grande</option>
                   <option value="Medio">Medio</option>
                   <option value="Pequeño">Pequeño</option>
