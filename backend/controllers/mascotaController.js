@@ -20,7 +20,7 @@ async function addMascota(req, res) {
     const mascota = Mascota({
       name,
       descripcion,
-      foto: result.url,
+      foto: result.secure_url,
       imgPublic_id: result.public_id,
       sexo,
       tamanho,
@@ -71,7 +71,7 @@ async function updateMascota(req, res) {
       // Crear nueva foto
       const result = await cloudinary.v2.uploader.upload(req.file.path);
 
-      mascotaID.foto = result.url;
+      mascotaID.foto = result.secure_url;
       mascotaID.imgPublic_id = result.public_id;
 
       await fs.unlink(req.file.path); // Elimina la foto de la carpeta 
