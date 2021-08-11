@@ -13,6 +13,7 @@ export default class FormularioAdoptaModal extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.validate = this.validate.bind(this);
 
     // Configuración de Estado
     this.state = {
@@ -21,6 +22,7 @@ export default class FormularioAdoptaModal extends Component {
       correo: "",
       mascota: "",
       isOpen: false,
+      errorNombre: "",
     };
   }
 
@@ -36,25 +38,42 @@ export default class FormularioAdoptaModal extends Component {
     this.setState({ correo: e.target.value });
   }
 
+  validate() {
+    this.setState({
+      errorNombre: "",
+    });
+
+    let bandera = false;
+
+    if (this.state.name.trim().length === 0) {
+      this.setState({ errorNombre: "Campo obligatorio" });
+      bandera = true;
+    }
+
+    return bandera;
+  }
+
   onSubmit(e) {
     e.preventDefault();
+    if (!this.validate()) {
+      const adoptaObject = {
+        name: this.state.name,
+        telefono: this.state.telefono,
+        correo: this.state.correo,
+        mascota: this.props.nameMascota,
+      };
 
-    const adoptaObject = {
-      name: this.state.name,
-      telefono: this.state.telefono,
-      correo: this.state.correo,
-      mascota: this.props.nameMascota,
-    };
+      saveAdoptantes(adoptaObject);
 
-    saveAdoptantes(adoptaObject);
-
-    this.setState({
-      name: "",
-      telefono: "",
-      correo: "",
-      mascota: "",
-    });
-    this.closeModal();
+      this.setState({
+        name: "",
+        telefono: "",
+        correo: "",
+        mascota: "",
+        errorNombre: "",
+      });
+      this.closeModal();
+    }
   }
 
   openModal() {
@@ -68,6 +87,7 @@ export default class FormularioAdoptaModal extends Component {
       correo: "",
       mascota: "",
       isOpen: false,
+      errorNombre: "",
     });
   }
 
@@ -105,6 +125,7 @@ export default class FormularioAdoptaModal extends Component {
                   autoComplete="off"
                   required
                 />
+                <p className="text-danger">{this.state.errorNombre}</p>
               </Form.Group>
 
               <Form.Group controlId="Telefono" className="mt-3">
@@ -114,6 +135,7 @@ export default class FormularioAdoptaModal extends Component {
                   value={this.state.telefono}
                   onChange={this.onChangeAdoptaTelefono}
                   autoComplete="off"
+                  min="0"
                   required
                 />
               </Form.Group>

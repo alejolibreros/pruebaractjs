@@ -17,6 +17,7 @@ export default class FormularioMascotaModal extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this._onLogoutClick = this._onLogoutClick.bind(this);
+    this.validate = this.validate.bind(this);
 
     this.fileInput = React.createRef();
 
@@ -30,6 +31,8 @@ export default class FormularioMascotaModal extends Component {
       edad: "",
       estado: "No Adoptado",
       isOpen: false,
+      errorNombre: "",
+      errorDescripcion: "",
     };
   }
 
@@ -53,32 +56,56 @@ export default class FormularioMascotaModal extends Component {
     this.setState({ edad: e.target.value });
   }
 
+  validate() {
+    this.setState({
+      errorNombre: "",
+      errorDescripcion: "",
+    });
+
+    let bandera = false;
+
+    if (this.state.name.trim().length === 0) {
+      this.setState({ errorNombre: "Campo obligatorio" });
+      bandera = true;
+    }
+    if (this.state.descripcion.trim().length === 0) {
+      this.setState({ errorDescripcion: "Campo obligatorio" });
+      bandera = true;
+    }
+
+    return bandera;
+  }
+
   _onSubmit(e) {
     e.preventDefault();
-    const mascotaObject = new FormData();
+    if (!this.validate()) {
+      const mascotaObject = new FormData();
 
-    mascotaObject.append("name", this.state.name);
-    mascotaObject.append("descripcion", this.state.descripcion);
-    mascotaObject.append("foto", this.fileInput.current.files[0]);
-    mascotaObject.append("sexo", this.state.sexo);
-    mascotaObject.append("tamanho", this.state.tamanho);
-    mascotaObject.append("edad", this.state.edad);
-    mascotaObject.append("estado", this.state.estado);
+      mascotaObject.append("name", this.state.name);
+      mascotaObject.append("descripcion", this.state.descripcion);
+      mascotaObject.append("foto", this.fileInput.current.files[0]);
+      mascotaObject.append("sexo", this.state.sexo);
+      mascotaObject.append("tamanho", this.state.tamanho);
+      mascotaObject.append("edad", this.state.edad);
+      mascotaObject.append("estado", this.state.estado);
 
-    this.props.onSubmit(mascotaObject);
+      this.props.onSubmit(mascotaObject);
 
-    this.fileInput.current.value = "";
+      this.fileInput.current.value = "";
 
-    this.setState({
-      name: "",
-      descripcion: "",
-      foto: "",
-      sexo: "",
-      tamanho: "",
-      edad: "",
-      estado: "No Adoptado",
-      isOpen: false,
-    });
+      this.setState({
+        name: "",
+        descripcion: "",
+        foto: "",
+        sexo: "",
+        tamanho: "",
+        edad: "",
+        estado: "No Adoptado",
+        isOpen: false,
+        errorNombre: "",
+        errorDescripcion: "",
+      });
+    }
   }
 
   openModal() {
@@ -96,6 +123,8 @@ export default class FormularioMascotaModal extends Component {
       edad: "",
       estado: "No Adoptado",
       isOpen: false,
+      errorNombre: "",
+      errorDescripcion: ""
     });
   }
 
@@ -143,6 +172,7 @@ export default class FormularioMascotaModal extends Component {
                       autoComplete="off"
                       required
                     />
+                    <p className="text-danger">{this.state.errorNombre}</p>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -207,6 +237,7 @@ export default class FormularioMascotaModal extends Component {
                   autoComplete="off"
                   required
                 />
+                <p className="text-danger">{this.state.errorDescripcion}</p>
               </Form.Group>
               <Form.Group className="d-flex justify-content-end mt-3">
                 <Button variant="success" block="block" type="submit">
