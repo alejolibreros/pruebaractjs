@@ -167,7 +167,7 @@ export default class EditarMascotaModal extends Component {
               <Form.Group controlId="Edad">
                 <Form.Control
                   type="number"
-                  placeholder="Edad"
+                  placeholder="Edad (años)"
                   min="0"
                   max="20"
                   value={this.state.edad}
