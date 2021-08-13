@@ -6,7 +6,7 @@ export default class FormularioMascotaModal extends Component {
   constructor(props) {
     super(props);
 
-    // Setting up functions
+    // Configuración de funciones
     this.onChangeMascotaNombre = this.onChangeMascotaNombre.bind(this);
     this.onChangeMascotaDescripcion =
       this.onChangeMascotaDescripcion.bind(this);
@@ -17,10 +17,11 @@ export default class FormularioMascotaModal extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this._onLogoutClick = this._onLogoutClick.bind(this);
+    this.validate = this.validate.bind(this);
 
     this.fileInput = React.createRef();
 
-    // Setting up state
+    // Configuración de Estado
     this.state = {
       name: "",
       descripcion: "",
@@ -30,6 +31,8 @@ export default class FormularioMascotaModal extends Component {
       edad: "",
       estado: "No Adoptado",
       isOpen: false,
+      errorNombre: "",
+      errorDescripcion: "",
     };
   }
 
@@ -53,32 +56,56 @@ export default class FormularioMascotaModal extends Component {
     this.setState({ edad: e.target.value });
   }
 
+  validate() {
+    this.setState({
+      errorNombre: "",
+      errorDescripcion: "",
+    });
+
+    let bandera = false;
+
+    if (this.state.name.trim().length === 0) {
+      this.setState({ errorNombre: "Campo obligatorio" });
+      bandera = true;
+    }
+    if (this.state.descripcion.trim().length === 0) {
+      this.setState({ errorDescripcion: "Campo obligatorio" });
+      bandera = true;
+    }
+
+    return bandera;
+  }
+
   _onSubmit(e) {
     e.preventDefault();
-    const mascotaObject = new FormData();
+    if (!this.validate()) {
+      const mascotaObject = new FormData();
 
-    mascotaObject.append("name", this.state.name);
-    mascotaObject.append("descripcion", this.state.descripcion);
-    mascotaObject.append("foto", this.fileInput.current.files[0]);
-    mascotaObject.append("sexo", this.state.sexo);
-    mascotaObject.append("tamanho", this.state.tamanho);
-    mascotaObject.append("edad", this.state.edad);
-    mascotaObject.append("estado", this.state.estado);
+      mascotaObject.append("name", this.state.name);
+      mascotaObject.append("descripcion", this.state.descripcion);
+      mascotaObject.append("foto", this.fileInput.current.files[0]);
+      mascotaObject.append("sexo", this.state.sexo);
+      mascotaObject.append("tamanho", this.state.tamanho);
+      mascotaObject.append("edad", this.state.edad);
+      mascotaObject.append("estado", this.state.estado);
 
-    this.props.onSubmit(mascotaObject);
+      this.props.onSubmit(mascotaObject);
 
-    this.fileInput.current.value = "";
+      this.fileInput.current.value = "";
 
-    this.setState({
-      name: "",
-      descripcion: "",
-      foto: "",
-      sexo: "",
-      tamanho: "",
-      edad: "",
-      estado: "No Adoptado",
-      isOpen: false,
-    });
+      this.setState({
+        name: "",
+        descripcion: "",
+        foto: "",
+        sexo: "",
+        tamanho: "",
+        edad: "",
+        estado: "No Adoptado",
+        isOpen: false,
+        errorNombre: "",
+        errorDescripcion: "",
+      });
+    }
   }
 
   openModal() {
@@ -96,6 +123,8 @@ export default class FormularioMascotaModal extends Component {
       edad: "",
       estado: "No Adoptado",
       isOpen: false,
+      errorNombre: "",
+      errorDescripcion: ""
     });
   }
 
@@ -143,6 +172,7 @@ export default class FormularioMascotaModal extends Component {
                       autoComplete="off"
                       required
                     />
+                    <p className="text-danger">{this.state.errorNombre}</p>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -151,8 +181,10 @@ export default class FormularioMascotaModal extends Component {
                       as="select"
                       value={this.state.sexo}
                       onChange={this.onChangeMascotaSexo}
+                      placeholder="select"
+                      required
                     >
-                      <option>Sexo</option>
+                      <option value="">Sexo</option>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>
                     </Form.Control>
@@ -164,7 +196,9 @@ export default class FormularioMascotaModal extends Component {
                   <Form.Group controlId="Edad">
                     <Form.Control
                       type="number"
-                      placeholder="Edad"
+                      placeholder="Edad (años)"
+                      min="0"
+                      max="20"
                       value={this.state.edad}
                       onChange={this.onChangeMascotaEdad}
                       autoComplete="off"
@@ -178,8 +212,10 @@ export default class FormularioMascotaModal extends Component {
                       as="select"
                       value={this.state.tamanho}
                       onChange={this.onChangeMascotaTamanho}
+                      placeholder="select"
+                      required
                     >
-                      <option>Tamaño</option>
+                      <option value="">Tamaño</option>
                       <option value="Grande">Grande</option>
                       <option value="Medio">Medio</option>
                       <option value="Pequeño">Pequeño</option>
@@ -201,6 +237,7 @@ export default class FormularioMascotaModal extends Component {
                   autoComplete="off"
                   required
                 />
+                <p className="text-danger">{this.state.errorDescripcion}</p>
               </Form.Group>
               <Form.Group className="d-flex justify-content-end mt-3">
                 <Button variant="success" block="block" type="submit">

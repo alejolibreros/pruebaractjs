@@ -42,7 +42,7 @@ class Landing extends Component {
     return (
       <>
         <DemoCarousel />
-        <center>
+        <center className="mt-4">
           <p>
             Somos un proyecto social para dar hogar a gatos y perros que no lo
             tienen. Tú puedes cambiar una vida, anímate.

@@ -1,7 +1,7 @@
 const Mascota = require("../models/Mascota");
 const cloudinary = require("cloudinary");
 const { cloudinaryConfig } = require("../config");
-
+// Configuración servidor de imágenes Cloudinary 
 cloudinary.config({
   cloud_name: cloudinaryConfig.cloud_name,
   api_key: cloudinaryConfig.api_key,
@@ -14,13 +14,14 @@ const fs = require("fs-extra");
 async function addMascota(req, res) {
   try {
     const { name, descripcion, sexo, tamanho, edad, estado } = req.body;
-
+    // Sube la imagen al servidor de imágenes Cloudinary 
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     const mascota = Mascota({
       name,
       descripcion,
-      foto: result.url,
+      foto: result.secure_url,
+      imgPublic_id: result.public_id,
       sexo,
       tamanho,
       edad,
@@ -28,7 +29,7 @@ async function addMascota(req, res) {
     });
 
     const mascotaStored = await mascota.save();
-    await fs.unlink(req.file.path); // Elimina la foto
+    await fs.unlink(req.file.path); // Elimina la foto de la carpeta
 
     res.status(201).send({ mascotaStored });
   } catch (e) {
@@ -53,9 +54,9 @@ async function updateMascota(req, res) {
   try {
     const { name, descripcion, sexo, tamanho, edad, estado } = req.body;
 
-    //Busco la mascota
+    //Busca la mascota
     const mascotaID = await Mascota.findOne({ _id: req.params.id });
-    //Actualizo sus datos
+    //Actualiza datos
     mascotaID.name = name;
     mascotaID.descripcion = descripcion;
     mascotaID.sexo = sexo;
@@ -63,11 +64,17 @@ async function updateMascota(req, res) {
     mascotaID.edad = edad;
     mascotaID.estado = estado;
 
+    // Validar si existe una imagen en el request
     if (req.file) {
+      // Elimina antigua foto de Cloudinary
+      await cloudinary.v2.uploader.destroy(mascotaID.imgPublic_id);
+      // Crear nueva foto
       const result = await cloudinary.v2.uploader.upload(req.file.path);
-      mascotaID.foto = result.url;
 
-      await fs.unlink(req.file.path); // Elimina la foto
+      mascotaID.foto = result.secure_url;
+      mascotaID.imgPublic_id = result.public_id;
+
+      await fs.unlink(req.file.path); // Elimina la foto de la carpeta 
 
       res.status(200).send(await mascotaID.save());
     } else {

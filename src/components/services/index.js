@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseUrl = "https://secret-savannah-77380.herokuapp.com/";
 
+// Obtnener el listado de mascotas "No Adoptadas"
 export async function getMascotas() {
   try {
     const response = await axios({
@@ -14,6 +15,7 @@ export async function getMascotas() {
   }
 }
 
+// Crear y guardar una mascota en la BD 
 export async function saveMascota(mascotaData) {
   try {
     const response = await axios({
@@ -27,6 +29,7 @@ export async function saveMascota(mascotaData) {
   }
 }
 
+// Obtener la información de una mascota
 export async function getOneMascota(mascotaId) {
   try {
     const response = await axios({
@@ -39,6 +42,7 @@ export async function getOneMascota(mascotaId) {
   }
 }
 
+//  Actuliza información de una mascota
 export async function updateMascota(mascotaId, mascota) {
   try {
     const response = await axios.put(
@@ -51,6 +55,7 @@ export async function updateMascota(mascotaId, mascota) {
   }
 }
 
+// Cambia el estado de un mascota a "Adoptado"
 export async function deleteMascota(mascotaId) {
   try {
     const response = await axios.put(
@@ -62,6 +67,7 @@ export async function deleteMascota(mascotaId) {
   }
 }
 
+// Obtener el listado de adoptantes
 export async function getAdoptantes() {
   try {
     const response = await axios({
@@ -74,6 +80,7 @@ export async function getAdoptantes() {
   }
 }
 
+// Crear y guardar un adoptante en la BD
 export async function saveAdoptantes(adoptanteData) {
   try {
     const response = await axios({

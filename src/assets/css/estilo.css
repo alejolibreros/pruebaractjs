@@ -106,11 +106,6 @@ body {
 
 
 
-/*   textarea, textarea.form-control, input.form-control, input[type=text], input[type=password], input[type=email], input[type=number], [type=text].form-control, [type=password].form-control, [type=email].form-control, [type=tel].form-control, [contenteditable].form-control {
-
-    border-radius: 45px;
-} */
-
 button {
     background-color: #ff3310;      
     color: #fff;
@@ -329,6 +324,10 @@ p {
  border-radius: 22px!important; 
 }
 
+p.legend{
+  background-color: rgba(0, 0, 0, 0.747); 
+ border-radius: 22px!important; 
+}
 
 
 .card {

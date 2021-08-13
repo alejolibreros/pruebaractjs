@@ -12,6 +12,9 @@ let mascotaSchema = new Schema(
     foto: {
       type: String,
     },
+    imgPublic_id: {
+      type: String,
+    },
     sexo: {
       type: String,
     },

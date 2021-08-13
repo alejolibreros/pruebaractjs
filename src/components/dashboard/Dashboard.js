@@ -55,7 +55,7 @@ const Dashboard = (props) => {
     <div className="form-wrapper">
       <center className="mt-2">
         <h2 style={{ color: "white" }}>
-          ¡Hola Administrador {user.name.split(" ")[0]}!
+          ¡Hola administrador {user.name.split(" ")[0]}!
         </h2>
       </center>
 

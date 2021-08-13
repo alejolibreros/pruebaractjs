@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
   
-// Adoptante Model
+// Modelo adoptante
 var adoptanteSchema = require("../models/Adoptante");
 
 // Crear Adoptante
@@ -10,7 +10,6 @@ router.route("/crear-adoptante").post((req, res, next) => {
     if (error) {
       return next(error);
     } else {
-      console.log(data);
       res.json(data);
     }
   });
@@ -27,7 +26,4 @@ router.route("/ver-adoptante").get((req, res, next) => {
   });
 });
 
-
-
 module.exports = router;
-
